@@ -4,7 +4,6 @@ stages:
   - linting
   - vetting
   - compiling
-  - unit-testing
 
 
 conventional-commits-linting:

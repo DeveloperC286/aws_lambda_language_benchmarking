@@ -33,16 +33,3 @@ rust-compiling:
   rules:
     - if: $CI_MERGE_REQUEST_ID
     - if: $CI_COMMIT_BRANCH == "master"
-
-
-rust-unit-testing:
-  stage: unit-testing
-  image: rust
-  script:
-    - cd rust/aws-lambda-benchmarking/
-    - cargo test --verbose --workspace
-    - cargo test --verbose --workspace --all-features
-    - cargo test --verbose --workspace --no-default-features
-  rules:
-    - if: $CI_MERGE_REQUEST_ID
-    - if: $CI_COMMIT_BRANCH == "master"
