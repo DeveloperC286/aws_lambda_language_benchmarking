@@ -1,5 +1,9 @@
 stages:
   - conventional-commits-linting
+  - formatting
+  - linting
+  - compiling
+  - unit-testing
 
 
 conventional-commits-linting:
@@ -13,3 +17,7 @@ conventional-commits-linting:
     - /usr/local/cargo/bin/conventional_commits_linter --from-commit-hash $COMMON_ANCESTOR_COMMIT --allow-angular-type-only
   rules:
     - if: $CI_MERGE_REQUEST_ID
+
+
+include:
+  - local: .gitlab/ci/rust.yml
