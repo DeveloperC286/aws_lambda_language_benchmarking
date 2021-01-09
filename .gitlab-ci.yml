@@ -22,3 +22,4 @@ conventional-commits-linting:
 include:
   - local: .gitlab/ci/rust.yml
   - local: .gitlab/ci/go.yml
+  - local: .gitlab/ci/nodejs.yml
