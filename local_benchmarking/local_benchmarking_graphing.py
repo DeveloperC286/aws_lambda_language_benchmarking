@@ -13,6 +13,7 @@ def main(argv):
     parser.add_argument('--nodejs', required=True, type=str)
     parser.add_argument('--rust', required=True, type=str)
     parser.add_argument('--go', required=True, type=str)
+    parser.add_argument('--python3', required=True, type=str)
     args = parser.parse_args()
 
     if not path.isfile(args.nodejs):
@@ -25,6 +26,10 @@ def main(argv):
 
     if not path.isfile(args.go):
         print("The input Go file '{}' does not exist or is not a file.".format(args.input))
+        sys.exit(2)
+
+    if not path.isfile(args.go):
+        print("The input Python3 file '{}' does not exist or is not a file.".format(args.input))
         sys.exit(2)
 
     patches = []
@@ -49,6 +54,14 @@ def main(argv):
         colour = 'cyan'
         plt.plot(list(range(1, len(times) + 1)), times, color=colour)
         patches.append(mpatches.Patch(color=colour, label='Go'))
+
+    with open(args.python3) as f:
+        results =  json.load(f)['results'][0]
+        times = results['times']
+        colour = 'yellow'
+        plt.plot(list(range(1, len(times) + 1)), times, color=colour)
+        patches.append(mpatches.Patch(color=colour, label='Python3'))
+
 
     plt.legend(handles=patches)
     plt.ylabel('Time (Seconds)')
