@@ -1,5 +1,5 @@
 {
-  "name": "aws-lambda-benchmarking",
+  "name": "aws_lambda_benchmarking",
   "version": "0.1.0",
   "description": "",
   "main": "src/main.js",

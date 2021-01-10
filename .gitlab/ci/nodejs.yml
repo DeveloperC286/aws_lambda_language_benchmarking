@@ -4,7 +4,7 @@ nodejs-formatting:
   before_script:
     - npm -g install js-beautify
   script:
-    - cd nodejs/aws-lambda-benchmarking/
+    - cd nodejs/aws_lambda_benchmarking/
     - for i in $( du -a ./src/ | awk '{print $2}' | grep -i "[.]js$" ); do
     - echo $i
     - js-beautify $i > temp.txt
@@ -20,7 +20,7 @@ nodejs-linting:
   before_script:
     - npm -g install eslint
   script:
-    - cd nodejs/aws-lambda-benchmarking/
+    - cd nodejs/aws_lambda_benchmarking/
     - eslint ./src/
   rules:
     - if: $CI_MERGE_REQUEST_ID

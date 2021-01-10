@@ -4,7 +4,7 @@ rust-formatting:
   before_script:
     - rustup component add rustfmt
   script:
-    - cd rust/aws-lambda-benchmarking/
+    - cd rust/aws_lambda_benchmarking/
     - cargo fmt --all -- --check
   rules:
     - if: $CI_MERGE_REQUEST_ID
@@ -16,7 +16,7 @@ rust-linting:
   before_script:
     - rustup component add clippy
   script:
-    - cd rust/aws-lambda-benchmarking/
+    - cd rust/aws_lambda_benchmarking/
     - cargo clippy --verbose --workspace --all-targets -- -D warnings
     - cargo clippy --verbose --workspace --all-targets --all-features -- -D warnings
     - cargo clippy --verbose --workspace --all-targets --no-default-features -- -D warnings
@@ -28,7 +28,7 @@ rust-compiling:
   stage: compiling
   image: rust
   script:
-    - cd rust/aws-lambda-benchmarking/
+    - cd rust/aws_lambda_benchmarking/
     - cargo build
   rules:
     - if: $CI_MERGE_REQUEST_ID
