@@ -1,43 +1,43 @@
-go-formatting:
+go-local-formatting:
   stage: formatting
   image: golang
   script:
-    - cd go/aws_lambda_benchmarking/
+    - cd go/local/
     - MALFORMATTED_FILES=`gofmt -s -l ./src/ | wc -l`
     - test $MALFORMATTED_FILES -eq 0
   rules:
     - if: $CI_MERGE_REQUEST_ID
 
 
-go-linting:
+go-local-linting:
   stage: linting
   image: golang
   before_script:
     - go get -u golang.org/x/lint/golint
   script:
-    - cd go/aws_lambda_benchmarking/
+    - cd go/local/
     - LINTING_ISSUES=`/go/bin/golint ./src/ | wc -l`
     - test $LINTING_ISSUES -eq 0
   rules:
     - if: $CI_MERGE_REQUEST_ID
 
 
-go-vetting:
+go-local-vetting:
   stage: vetting
   image: golang
   script:
-    - cd go/aws_lambda_benchmarking/
+    - cd go/local/
     - go vet ./src/
   rules:
     - if: $CI_MERGE_REQUEST_ID
 
 
-go-compiling:
+go-local-compiling:
   stage: compiling
   image: golang
   script:
-    - cd go/aws_lambda_benchmarking/
-    - go build -o aws_lambda_benchmarking ./src/
+    - cd go/local/
+    - go build -o main ./src/
   rules:
     - if: $CI_MERGE_REQUEST_ID
     - if: $CI_COMMIT_BRANCH == "master"
