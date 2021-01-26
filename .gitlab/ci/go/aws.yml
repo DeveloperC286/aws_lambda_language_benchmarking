@@ -1,0 +1,48 @@
+go-aws-formatting:
+  stage: formatting
+  image: golang
+  script:
+    - cd go/aws/
+    - MALFORMATTED_FILES=`gofmt -s -l ./src/ | wc -l`
+    - test $MALFORMATTED_FILES -eq 0
+  rules:
+    - if: $CI_MERGE_REQUEST_ID
+
+
+go-aws-linting:
+  stage: linting
+  image: golang
+  before_script:
+    - go get golang.org/x/lint/golint
+    - go get github.com/aws/aws-lambda-go/lambda
+  script:
+    - cd go/aws/
+    - LINTING_ISSUES=`/go/bin/golint ./src/ | wc -l`
+    - test $LINTING_ISSUES -eq 0
+  rules:
+    - if: $CI_MERGE_REQUEST_ID
+
+
+go-aws-vetting:
+  stage: vetting
+  image: golang
+  before_script:
+    - go get github.com/aws/aws-lambda-go/lambda
+  script:
+    - cd go/aws/
+    - go vet ./src/
+  rules:
+    - if: $CI_MERGE_REQUEST_ID
+
+
+go-aws-compiling:
+  stage: compiling
+  image: golang
+  before_script:
+    - go get github.com/aws/aws-lambda-go/lambda
+  script:
+    - cd go/aws/
+    - go build -o main ./src/
+  rules:
+    - if: $CI_MERGE_REQUEST_ID
+    - if: $CI_COMMIT_BRANCH == "master"
