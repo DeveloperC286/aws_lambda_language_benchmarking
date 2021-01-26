@@ -1,22 +1,22 @@
-rust-formatting:
+rust-local-formatting:
   stage: formatting
   image: rust
   before_script:
     - rustup component add rustfmt
   script:
-    - cd rust/aws_lambda_benchmarking/
+    - cd rust/local/
     - cargo fmt --all -- --check
   rules:
     - if: $CI_MERGE_REQUEST_ID
 
 
-rust-linting:
+rust-local-linting:
   stage: linting
   image: rust
   before_script:
     - rustup component add clippy
   script:
-    - cd rust/aws_lambda_benchmarking/
+    - cd rust/local/
     - cargo clippy --verbose --workspace --all-targets -- -D warnings
     - cargo clippy --verbose --workspace --all-targets --all-features -- -D warnings
     - cargo clippy --verbose --workspace --all-targets --no-default-features -- -D warnings
@@ -24,11 +24,11 @@ rust-linting:
     - if: $CI_MERGE_REQUEST_ID
 
 
-rust-compiling:
+rust-local-compiling:
   stage: compiling
   image: rust
   script:
-    - cd rust/aws_lambda_benchmarking/
+    - cd rust/local/
     - cargo build
   rules:
     - if: $CI_MERGE_REQUEST_ID
