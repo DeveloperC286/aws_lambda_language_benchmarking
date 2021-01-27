@@ -24,5 +24,6 @@ include:
   - local: .gitlab/ci/go/local.yml
   - local: .gitlab/ci/nodejs/aws.yml
   - local: .gitlab/ci/nodejs/local.yml
+  - local: .gitlab/ci/python/aws.yml
   - local: .gitlab/ci/python/local.yml
   - local: .gitlab/ci/rust.yml
