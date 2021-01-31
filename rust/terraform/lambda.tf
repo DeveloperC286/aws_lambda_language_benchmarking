@@ -6,7 +6,7 @@ resource "aws_lambda_function" "rust_128_mb" {
   memory_size = 128
 
   # Source code
-  handler = "doesnt.matter"
+  handler  = "doesnt.matter"
   filename = "lambda_function.zip"
 
   # IAM
