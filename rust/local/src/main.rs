@@ -10,5 +10,15 @@ struct Args {
 
 fn main() {
     let args = Args::from_args();
-    println!("{:x}", Sha256::digest(args.input.as_bytes()));
+    println!("{}", hash_input(args.input));
+}
+
+fn hash_input(input: String) -> String {
+    let mut output = Sha256::digest(input.as_bytes());
+
+    for _ in 1..100000 {
+        output = Sha256::digest(&output);
+    }
+
+    format!("{:x}", output)
 }

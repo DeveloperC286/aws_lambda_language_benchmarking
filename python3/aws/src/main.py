@@ -22,12 +22,9 @@ def lambda_handler(event, context):
                 input = body['input']
 
                 if type(input) == str:
-                    input = input.encode('utf-8')
-                    hash = hashlib.sha256(input).hexdigest()
-
                     return {
                         'statusCode': 200,
-                        'body': hash
+                        'body': hash_input(input.encode('utf-8'))
                     }
 
                 return {
@@ -49,3 +46,12 @@ def lambda_handler(event, context):
         'statusCode': 400,
         'body': 'No request body.'
     }
+
+
+def hash_input(input):
+    output = hashlib.sha256(input).digest()
+
+    for x in range(99998):
+        output = hashlib.sha256(output).digest()
+
+    return hashlib.sha256(output).hexdigest()

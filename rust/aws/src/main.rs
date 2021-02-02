@@ -41,7 +41,7 @@ fn handler(request: Request, _: Context) -> Result<Response, HandlerError> {
                         Some(input) => Ok(Response {
                             is_base64_encoded: false,
                             status_code: 200,
-                            body: format!("{:x}", Sha256::digest(input.as_bytes())),
+                            body: hash_input(input),
                         }),
                         None => Ok(Response {
                             is_base64_encoded: false,
@@ -63,4 +63,14 @@ fn handler(request: Request, _: Context) -> Result<Response, HandlerError> {
             body: "No request body.".to_string(),
         }),
     }
+}
+
+fn hash_input(input: String) -> String {
+    let mut output = Sha256::digest(input.as_bytes());
+
+    for _ in 1..100000 {
+        output = Sha256::digest(&output);
+    }
+
+    format!("{:x}", output)
 }

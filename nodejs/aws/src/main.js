@@ -20,13 +20,11 @@ exports.handler = (event, context, callback) => {
 
             if (typeof input !== 'undefined' && input) {
                 if (typeof input === 'string' || input instanceof String) {
-                    let hash = crypto.createHash('sha256').update(input).digest('hex');
-
                     callback(null, {
                         "isBase64Encoded": false,
                         "statusCode": 200,
                         "headers": {},
-                        "body": hash
+                        "body": hashInput(input)
                     });
                 }
 
@@ -60,4 +58,14 @@ exports.handler = (event, context, callback) => {
         "headers": {},
         "body": "No request body."
     });
+}
+
+function hashInput(input) {
+    var output = crypto.createHash('sha256').update(input).digest();
+
+    for (const _ in [...Array(99998).keys()]) { // eslint-disable-line no-unused-vars
+        output = crypto.createHash('sha256').update(output).digest();
+    }
+
+    return crypto.createHash('sha256').update(output).digest('hex');
 }

@@ -18,7 +18,15 @@ func main() {
 		os.Exit(1)
 	}
 
-	hasher := sha256.New()
-	hasher.Write([]byte(*inputPtr))
-	fmt.Println(hex.EncodeToString(hasher.Sum(nil)))
+	fmt.Println(hashInput(*inputPtr))
+}
+
+func hashInput(input string) string {
+	output := sha256.Sum256([]byte(input))
+
+	for i := 1; i < 100000; i++ {
+		output = sha256.Sum256(output[:])
+	}
+
+	return hex.EncodeToString(output[:])
 }

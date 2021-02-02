@@ -25,10 +25,7 @@ func handleRequest(ctx context.Context, request events.APIGatewayProxyRequest) (
 		}
 
 		if requestBody.Input != "" {
-			hasher := sha256.New()
-			hasher.Write([]byte(requestBody.Input))
-
-			return events.APIGatewayProxyResponse{Body: hex.EncodeToString(hasher.Sum(nil)), StatusCode: 200}, nil
+			return events.APIGatewayProxyResponse{Body: hashInput(requestBody.Input), StatusCode: 200}, nil
 		}
 
 		return events.APIGatewayProxyResponse{Body: "No input within the request body.", StatusCode: 400}, nil
@@ -39,4 +36,14 @@ func handleRequest(ctx context.Context, request events.APIGatewayProxyRequest) (
 
 func main() {
 	lambda.Start(handleRequest)
+}
+
+func hashInput(input string) string {
+	output := sha256.Sum256([]byte(input))
+
+	for i := 1; i < 100000; i++ {
+		output = sha256.Sum256(output[:])
+	}
+
+	return hex.EncodeToString(output[:])
 }
