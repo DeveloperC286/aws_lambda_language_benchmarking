@@ -12,8 +12,8 @@ INPUT="12345"
 
 hyperfine --warmup 100 --min-runs 1000 '../../rust/local/target/release/aws_lambda_benchmarking --input "'$INPUT'"' --export-json "rust-$RUST_VERSION-$DATE.json"
 
-hyperfine --warmup 100 --min-runs 1000 'node ../../nodejs/local/src/main.js --input "'$INPUT'"' --export-json "nodejs-$NODEJS_VERSION-$DATE.json"
+#hyperfine --warmup 100 --min-runs 1000 'node ../../nodejs/local/src/main.js --input "'$INPUT'"' --export-json "nodejs-$NODEJS_VERSION-$DATE.json"
 
-hyperfine --warmup 100 --min-runs 1000 '../../go/local/aws_lambda_benchmarking --input "'$INPUT'"' --export-json "go-$GO_VERSION-$DATE.json"
+#hyperfine --warmup 100 --min-runs 1000 '../../go/local/aws_lambda_benchmarking --input "'$INPUT'"' --export-json "go-$GO_VERSION-$DATE.json"
 
-hyperfine --warmup 100 --min-runs 1000 'python3 ../../python3/local/src/main.py --input "'$INPUT'"' --export-json "python3-$PYTHON3_VERSION-$DATE.json"
+#hyperfine --warmup 100 --min-runs 1000 'python3 ../../python3/local/src/main.py --input "'$INPUT'"' --export-json "python3-$PYTHON3_VERSION-$DATE.json"
