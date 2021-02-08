@@ -1,4 +1,4 @@
-# AWS Lambda Benchmarking - Python3
+# AWS Lambda Language Benchmarking - Python3
 
 ## AWS Lambda - Zip File
 In order to ship the Python3 source code to AWS for usage in a Lambda the source code needs correctly zipped up, along with the Lambda layers dependencies.

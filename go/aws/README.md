@@ -1,4 +1,4 @@
-# AWS Lambda Benchmarking - Go
+# AWS Lambda Language Benchmarking - Go
 
 ## AWS Lambda - Zip File
 To package up the Go source code for AWS Lambda to use, the source code needs to be compiled to a binary, and then the binary needs correctly zipped up.

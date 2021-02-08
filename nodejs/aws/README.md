@@ -1,4 +1,4 @@
-# AWS Lambda Benchmarking - Node.js
+# AWS Lambda Language Benchmarking - Node.js
 
 ## AWS Lambda - Zip File
 In order to ship the Node.js source code to AWS for usage in a Lambda the source code needs correctly zipped up, along with the Lambda layers dependencies.

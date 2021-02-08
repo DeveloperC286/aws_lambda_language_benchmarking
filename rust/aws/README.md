@@ -1,4 +1,4 @@
-# AWS Lambda Benchmarking - Rust
+# AWS Lambda Language Benchmarking - Rust
 
 ## AWS Lambda - Zip File
 To prepare the Rust source code to be used in an AWS Lambda, the source code needs to be compiled to a binary and then zipped up.

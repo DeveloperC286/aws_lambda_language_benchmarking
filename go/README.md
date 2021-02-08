@@ -1,4 +1,4 @@
-# AWS Lambda Benchmarking - Go
+# AWS Lambda Language Benchmarking - Go
 
 
 ## Local

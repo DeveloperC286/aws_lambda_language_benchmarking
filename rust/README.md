@@ -1,4 +1,4 @@
-# AWS Lambda Benchmarking - Rust
+# AWS Lambda Language Benchmarking - Rust
 
 
 ## Local

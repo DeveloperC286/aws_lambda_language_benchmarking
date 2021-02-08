@@ -1,4 +1,4 @@
-# AWS Lambda Benchmarking - Python3
+# AWS Lambda Language Benchmarking - Python3
 
 
 ## Local

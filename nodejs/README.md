@@ -1,4 +1,4 @@
-# AWS Lambda Benchmarking - Node.js
+# AWS Lambda Language Benchmarking - Node.js
 
 
 ## Local
