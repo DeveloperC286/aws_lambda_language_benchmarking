@@ -4,12 +4,20 @@ command -v 'k6' >/dev/null 2>&1 || { echo >&2 "The 'k6' command is not installed
 
 DATE=`date '+%d-%m-%Y'`
 
-BASE_URL="https://fslgc0j56k.execute-api.eu-west-2.amazonaws.com/hashing"
+RUST_VERSION=`rustc --version | awk '{print $2}'` # Compiled on local machine and using provided runtime.
+GO_VERSION='1.x'
+NODEJS_VERSION='12.x'
+PYTHON3_VERSION='3.8'
 
-k6 run -e URL=$BASE_URL/rust k6-benchmarking.js --iterations 1000 --vus 4 --summary-export rust-$DATE.json
+BASE_URL="https://f112ibizih.execute-api.eu-west-2.amazonaws.com/hashing"
+SUMMARY_STATS="avg,med,p(25),p(75),min,max"
+VUS=4
+ITERATIONS=1000
 
-k6 run -e URL=$BASE_URL/go k6-benchmarking.js --iterations 1000 --vus 4 --summary-export go-$DATE.json
+k6 run -e URL=$BASE_URL/rust k6-benchmarking.js --iterations $ITERATIONS --vus $VUS --summary-trend-stats=$SUMMARY_STATS --summary-time-unit=ms --summary-export "rust-$RUST_VERSION-$DATE.json"
 
-k6 run -e URL=$BASE_URL/nodejs k6-benchmarking.js --iterations 1000 --vus 4 --summary-export nodejs-$DATE.json
+k6 run -e URL=$BASE_URL/go k6-benchmarking.js --iterations $ITERATIONS --vus $VUS --summary-trend-stats=$SUMMARY_STATS --summary-time-unit=ms --summary-export "go-$GO_VERSION-$DATE.json"
 
-k6 run -e URL=$BASE_URL/python3 k6-benchmarking.js --iterations 1000 --vus 4 --summary-export python3-$DATE.json
+k6 run -e URL=$BASE_URL/nodejs k6-benchmarking.js --iterations $ITERATIONS --vus $VUS --summary-trend-stats=$SUMMARY_STATS --summary-time-unit=ms --summary-export "nodejs-$NODEJS_VERSION-$DATE.json"
+
+k6 run -e URL=$BASE_URL/python3 k6-benchmarking.js --iterations $ITERATIONS --vus $VUS --summary-trend-stats=$SUMMARY_STATS --summary-time-unit=ms --summary-export "python3-$PYTHON3_VERSION-$DATE.json"
