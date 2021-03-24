@@ -6,7 +6,10 @@ edition = "2018"
 
 
 [dependencies]
+# Arg parsing
 structopt = "0.3.21"
+
+# Hashing
 sha2 = "0.9.3"
 
 

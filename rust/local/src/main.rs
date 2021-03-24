@@ -2,7 +2,7 @@ use sha2::{Digest, Sha256};
 use structopt::StructOpt;
 
 #[derive(StructOpt, Debug)]
-#[structopt(name = "aws-lambda-benchmarking")]
+#[structopt(name = "aws_lambda_language_benchmarking")]
 struct Args {
     #[structopt(short, long)]
     input: String,

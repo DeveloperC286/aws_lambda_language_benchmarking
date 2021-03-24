@@ -1,4 +1,4 @@
-use lambda_runtime::{error::HandlerError, lambda, Context};
+use lambda_runtime::{handler_fn, Context, Error};
 use serde_derive::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 
@@ -21,12 +21,14 @@ struct Response {
     body: String,
 }
 
-fn main() -> Result<(), Box<dyn std::error::Error>> {
-    lambda!(handler);
+#[tokio::main]
+async fn main() -> Result<(), Error> {
+    let func = handler_fn(handler);
+    lambda_runtime::run(func).await?;
     Ok(())
 }
 
-fn handler(request: Request, _: Context) -> Result<Response, HandlerError> {
+async fn handler(request: Request, _: Context) -> Result<Response, Error> {
     match request.body {
         Some(body) => match body.trim() {
             "" | "{}" => Ok(Response {
