@@ -4,7 +4,7 @@ resource "null_resource" "rust_compile" {
   }
 
   provisioner "local-exec" {
-    command     = "cross build --target x86_64-unknown-linux-musl --release && mkdir -p ./compiled/ && cp ./target/x86_64-unknown-linux-musl/release/aws_lambda_benchmarking ./compiled/bootstrap"
+    command     = "rustup toolchain install stable-x86_64-unknown-linux-gnu --profile minimal && cross build --target x86_64-unknown-linux-musl --release && mkdir -p ./compiled/ && cp ./target/x86_64-unknown-linux-musl/release/aws_lambda_language_benchmarking ./compiled/bootstrap"
     working_dir = "${path.module}/../rust/aws"
   }
 }
