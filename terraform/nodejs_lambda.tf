@@ -10,7 +10,7 @@ resource "aws_lambda_function" "nodejs_128_mb" {
   # Runtime enviroment
   runtime     = "nodejs12.x"
   memory_size = 128
-  timeout = 10
+  timeout     = 10
 
   # Source code
   handler          = "main.handler"
