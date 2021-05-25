@@ -10,7 +10,7 @@ edition = "2018"
 structopt = "0.3.21"
 
 # Hashing
-sha2 = "0.9.3"
+sha2 = "0.9.5"
 
 
 [profile.release]
