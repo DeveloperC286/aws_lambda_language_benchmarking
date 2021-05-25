@@ -6,7 +6,7 @@ DATE=`date '+%d-%m-%Y'`
 
 RUST_VERSION=`rustc --version | awk '{print $2}'` # Compiled on local machine and using provided runtime.
 GO_VERSION='1.x'
-NODEJS_VERSION='12.x'
+NODEJS_VERSION='14.x'
 PYTHON3_VERSION='3.8'
 
 BASE_URL="https://f112ibizih.execute-api.eu-west-2.amazonaws.com/hashing"
