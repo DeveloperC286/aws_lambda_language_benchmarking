@@ -5,10 +5,10 @@ nodejs-local-formatting:
     - npm -g install js-beautify
   script:
     - cd nodejs/local/
-    - for i in $( du -a ./src/ | awk '{print $2}' | grep -i "[.]js$" ); do
-    - echo $i
-    - js-beautify $i > temp.txt
-    - cmp $i temp.txt || exit
+    - for i in $( du -a "./src/" | awk '{print $2}' | grep -i "[.]js$" ); do
+    - echo "$i"
+    - js-beautify "$i" > "temp.txt"
+    - cmp "$i" "temp.txt" || ( echo "$i needs formatted." && exit 1 )
     - done
   rules:
     - if: $CI_MERGE_REQUEST_ID

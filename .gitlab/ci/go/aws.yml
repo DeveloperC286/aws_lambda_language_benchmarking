@@ -3,8 +3,8 @@ go-aws-formatting:
   image: golang
   script:
     - cd go/aws/
-    - MALFORMATTED_FILES=`gofmt -s -l ./src/ | wc -l`
-    - test $MALFORMATTED_FILES -eq 0
+    - MALFORMATTED_FILES=$(gofmt -s -l ./src/ | wc -l)
+    - test "$MALFORMATTED_FILES" -eq 0
   rules:
     - if: $CI_MERGE_REQUEST_ID
 
@@ -17,8 +17,8 @@ go-aws-linting:
     - go get github.com/aws/aws-lambda-go/lambda
   script:
     - cd go/aws/
-    - LINTING_ISSUES=`/go/bin/golint ./src/ | wc -l`
-    - test $LINTING_ISSUES -eq 0
+    - LINTING_ISSUES=$(/go/bin/golint ./src/ | wc -l)
+    - test "$LINTING_ISSUES" -eq 0
   rules:
     - if: $CI_MERGE_REQUEST_ID
 
