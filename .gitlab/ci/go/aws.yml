@@ -38,6 +38,18 @@ go-aws-vetting:
     - if: $CI_MERGE_REQUEST_ID
 
 
+go-aws-module-tidying:
+  stage: module-tidying
+  image: golang
+  script:
+    - cd go/aws/
+    - cp "go.mod" "go.mod.copy"
+    - go mod tidy
+    - cmp "go.mod" "go.mod.copy" || ( echo "Modules need tidied." && exit 1 )
+  rules:
+    - if: $CI_MERGE_REQUEST_ID
+
+
 go-aws-compiling:
   stage: compiling
   image: golang

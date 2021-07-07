@@ -3,6 +3,7 @@ stages:
   - formatting
   - linting
   - vetting
+  - module-tidying
   - compiling
 
 
