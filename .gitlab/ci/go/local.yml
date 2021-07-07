@@ -3,8 +3,9 @@ go-local-formatting:
   image: golang
   script:
     - cd go/local/
-    - MALFORMATTED_FILES=$(gofmt -s -l ./src/ | wc -l)
-    - test "$MALFORMATTED_FILES" -eq 0
+    - for i in $(du -a "./src/" | awk '{print $2}' | grep -i "[.]go$"); do
+    - test -z "$(gofmt -l "$i")" || ( echo "$i needs formatted." && exit 1 )
+    - done
   rules:
     - if: $CI_MERGE_REQUEST_ID
 
@@ -16,8 +17,10 @@ go-local-linting:
     - go get -u golang.org/x/lint/golint
   script:
     - cd go/local/
-    - LINTING_ISSUES=$(/go/bin/golint ./src/ | wc -l)
-    - test "$LINTING_ISSUES" -eq 0
+    - go mod download
+    - for i in $(du -a "./src/" | awk '{print $2}' | grep -i "[.]go$"); do
+    - /go/bin/golint -set_exit_status "$i" || ( echo "$i needs linting." && exit 1 )
+    - done
   rules:
     - if: $CI_MERGE_REQUEST_ID
 
@@ -27,7 +30,10 @@ go-local-vetting:
   image: golang
   script:
     - cd go/local/
-    - go vet ./src/
+    - go mod download
+    - for i in $(du -a "./src/" | awk '{print $2}' | grep -i "[.]go$"); do
+    - test -z "$(go vet "$i" 2>&1)" || ( echo "$i needs vetting." && exit 1 )
+    - done
   rules:
     - if: $CI_MERGE_REQUEST_ID
 
@@ -37,7 +43,8 @@ go-local-compiling:
   image: golang
   script:
     - cd go/local/
-    - go build -o main ./src/
+    - go mod download
+    - go build -o main "./src/"
   rules:
     - if: $CI_MERGE_REQUEST_ID
     - if: $CI_COMMIT_BRANCH == "master"
