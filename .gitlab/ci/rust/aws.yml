@@ -5,7 +5,7 @@ rust-aws-formatting:
     - rustup component add rustfmt
   script:
     - cd rust/aws/
-    - cargo fmt --all -- --check
+    - cargo fmt --all -- --check --config=group_imports=StdExternalCrate
   rules:
     - if: $CI_MERGE_REQUEST_ID
 
