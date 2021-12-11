@@ -3,7 +3,6 @@ stages:
   - conventional-commits-linting
   - formatting
   - linting
-  - vetting
   - module-tidying
   - compiling
 
