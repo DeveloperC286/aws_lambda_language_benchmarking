@@ -6,11 +6,11 @@ edition = "2021"
 
 
 [dependencies]
-# Arg parsing
-structopt = "0.3.21"
+# For CLI parsing.
+structopt = "0.3.25"
 
-# Hashing
-sha2 = "0.9.5"
+# For SHA256 hashing.
+sha2 = "0.10.0"
 
 
 [profile.release]
