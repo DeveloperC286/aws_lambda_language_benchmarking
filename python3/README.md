@@ -1,9 +1,13 @@
 # AWS Lambda Language Benchmarking - Python3
 
+## AWS Lambda - Zip File
+In order to ship the Python3 source code to AWS for usage in a Lambda the source code needs correctly zipped up, along with the Lambda layers dependencies.
 
-## Local
-The directory `./local/` contains the source code for the local Python3 CLI application.
+Fortunately there are no external dependencies only core Python3 functions are used, so just the source code needs correctly zipped up.
 
+```
+cd src/
+zip -r lambda_function.zip main.py
+```
 
-## AWS
-The directory `./aws/` contains the source code for the Python3 AWS Lambda integrated with the AWS API Gateway.
+The zip file `lambda_function.zip` can then be uploaded for usage as a Python3 AWS Lambda.

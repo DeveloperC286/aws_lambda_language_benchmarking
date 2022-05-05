@@ -1,8 +1,0 @@
-{
-  "name": "aws_lambda_language_benchmarking",
-  "version": "0.1.0",
-  "main": "src/main.js",
-  "dependencies": {
-    "yargs": "17.0.1"
-  }
-}
