@@ -8,7 +8,7 @@ While Rust does compile a static binary by default, the standard library is dyna
 Dynamic linking can create incompatibility issues, so you want a fully static binary for the provided runtime.
 The easiest way to achieve this is by using the tool  Cross, which compiles the target `x86_64-unknown-linux-musl` inside a Docker image.
 
-```
+```sh
 cargo install cross
 cross build --target x86_64-unknown-linux-musl --release
 cp target/x86_64-unknown-linux-musl/release/aws_lambda_benchmarking bootstrap

@@ -5,7 +5,7 @@ In order to ship the Node.js source code to AWS for usage in a Lambda the source
 
 Fortunately there are no external dependencies only core Node.js functions are used, so just the source code needs correctly zipped up.
 
-```
+```sh
 cd src/
 zip -r lambda_function.zip main.js
 ```
