@@ -71,7 +71,7 @@ fn hash_input(input: String) -> String {
     let mut output = Sha256::digest(input.as_bytes());
 
     for _ in 1..100000 {
-        output = Sha256::digest(&output);
+        output = Sha256::digest(output);
     }
 
     format!("{:x}", output)
