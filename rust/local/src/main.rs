@@ -1,15 +1,15 @@
+use clap::Parser;
 use sha2::{Digest, Sha256};
-use structopt::StructOpt;
 
-#[derive(StructOpt, Debug)]
-#[structopt(name = "aws_lambda_language_benchmarking")]
+#[derive(Parser, Debug)]
+#[command(author, version, about, long_about = None)]
 struct Args {
-    #[structopt(short, long)]
+    #[arg(short, long)]
     input: String,
 }
 
 fn main() {
-    let args = Args::from_args();
+    let args = Args::parse();
     println!("{}", hash_input(args.input));
 }
 
