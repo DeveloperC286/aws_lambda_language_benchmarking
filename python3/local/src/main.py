@@ -21,5 +21,5 @@ def hash_input(input):
     return hashlib.sha256(output).hexdigest()
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # noqa
     main(sys.argv[1:])

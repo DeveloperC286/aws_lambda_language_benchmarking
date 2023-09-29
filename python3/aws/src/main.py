@@ -21,7 +21,7 @@ def lambda_handler(event, context):
             if 'input' in body:
                 input = body['input']
 
-                if type(input) == str:
+                if isinstance(input, str):
                     return {
                         'statusCode': 200,
                         'body': hash_input(input.encode('utf-8'))
