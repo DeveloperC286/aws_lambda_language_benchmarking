@@ -1,5 +1,8 @@
 {
   "name": "aws_lambda_language_benchmarking",
   "version": "0.1.0",
-  "main": "src/main.js"
+  "main": "src/main.js",
+  "devDependencies": {
+    "js-beautify": "^1.15.1"
+  }
 }
