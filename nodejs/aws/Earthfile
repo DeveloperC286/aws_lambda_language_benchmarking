@@ -1,0 +1,52 @@
+VERSION 0.7
+
+
+COPY_CI_DATA:
+    COMMAND
+    COPY --dir "ci/" "./"
+
+
+golang-base:
+    FROM golang:1.22.1
+
+
+sh-formatting-base:
+    FROM +golang-base
+    RUN go install mvdan.cc/sh/v3/cmd/shfmt@v3.6.0
+    DO +COPY_CI_DATA
+
+
+check-shell-formatting:
+    FROM +sh-formatting-base
+    RUN ./ci/check-shell-formatting.sh
+
+
+check-formatting:
+    BUILD +check-shell-formatting
+
+
+fix-shell-formatting:
+    FROM +sh-formatting-base
+    RUN ./ci/fix-shell-formatting.sh
+    SAVE ARTIFACT "ci/" AS LOCAL "./"
+
+
+fix-formatting:
+    BUILD +fix-shell-formatting
+
+
+ubuntu-base:
+    FROM ubuntu:22.04
+    # https://askubuntu.com/questions/462690/what-does-apt-get-fix-missing-do-and-when-is-it-useful
+    RUN apt-get update --fix-missing
+
+
+check-shell-linting:
+    FROM +ubuntu-base
+    RUN apt-get install shellcheck -y
+    DO +COPY_CI_DATA
+    RUN ./ci/check-shell-linting.sh
+
+
+check-linting:
+    BUILD +check-shell-linting
