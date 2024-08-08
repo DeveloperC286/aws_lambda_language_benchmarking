@@ -1,0 +1,84 @@
+VERSION 0.7
+
+
+COPY_CI_DATA:
+    COMMAND
+    COPY --dir "ci/" "./"
+
+
+COPY_SOURCECODE:
+    COMMAND
+    DO +COPY_CI_DATA
+    COPY --dir "src/" "./"
+
+
+python-base:
+    FROM python:3-slim
+    WORKDIR /tmp/aws_lambda_language_benchmarking
+    DO +COPY_SOURCECODE
+
+
+check-python-formatting:
+    FROM +python-base
+    RUN pip3 install "autopep8"
+    RUN ./ci/check-python-formatting.sh
+
+
+golang-base:
+    FROM golang:1.22.1
+
+
+sh-formatting-base:
+    FROM +golang-base
+    RUN go install mvdan.cc/sh/v3/cmd/shfmt@v3.6.0
+    DO +COPY_CI_DATA
+
+
+check-shell-formatting:
+    FROM +sh-formatting-base
+    RUN ./ci/check-shell-formatting.sh
+
+
+check-formatting:
+    BUILD +check-python-formatting
+    BUILD +check-shell-formatting
+
+
+fix-python-formatting:
+    FROM +python-base
+    RUN pip3 install "autopep8"
+    RUN ./ci/fix-python-formatting.sh
+    SAVE ARTIFACT "src/" AS LOCAL "./"
+
+
+fix-shell-formatting:
+    FROM +sh-formatting-base
+    RUN ./ci/fix-shell-formatting.sh
+    SAVE ARTIFACT "ci/" AS LOCAL "./"
+
+
+fix-formatting:
+    BUILD +fix-python-formatting
+    BUILD +fix-shell-formatting
+
+
+ubuntu-base:
+    FROM ubuntu:22.04
+    # https://askubuntu.com/questions/462690/what-does-apt-get-fix-missing-do-and-when-is-it-useful
+    RUN apt-get update --fix-missing
+
+
+check-shell-linting:
+    FROM +ubuntu-base
+    RUN apt-get install shellcheck -y
+    DO +COPY_CI_DATA
+    RUN ./ci/check-shell-linting.sh
+
+
+check-linting:
+    BUILD +check-shell-linting
+
+
+compile:
+    FROM +python-base
+    RUN ./ci/compile.sh
