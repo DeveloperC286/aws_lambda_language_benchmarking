@@ -29,8 +29,7 @@ def lambda_handler(event, context):
 
                 return {
                     'statusCode': 400,
-                    'body': 'The input within the request body is not a String.'
-                }
+                    'body': 'The input within the request body is not a String.'}
 
             return {
                 'statusCode': 400,

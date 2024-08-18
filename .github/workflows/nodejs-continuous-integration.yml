@@ -1,4 +1,4 @@
-name: GitHub Actions Workflows
+name: Continuous Integration (CI)
 
 on: pull_request
 
@@ -7,23 +7,31 @@ env:
   FORCE_COLOR: 1
 
 jobs:
-  linting:
-    name: Linting
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download Earthly v0.8.12.
-        run: "sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.8.12/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'"
-      - name: Checkout code.
-        uses: actions/checkout@v3
-      - name: Check GitHub Actions workflows linting.
-        run: earthly +check-github-actions-workflows-linting
   formatting:
     name: Formatting
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        directory: [nodejs/aws, nodejs/local]
+        language: [nodejs, shell]
     steps:
       - name: Download Earthly v0.8.12.
         run: "sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.8.12/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'"
       - name: Checkout code.
         uses: actions/checkout@v3
       - name: Check formatting.
-        run: earthly +check-yaml-formatting
+        run: cd "${{ matrix.directory}}" && earthly --ci +check-${{ matrix.language }}-formatting
+  linting:
+    name: Linting
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        directory: [nodejs/aws, nodejs/local]
+        language: [shell]
+    steps:
+      - name: Download Earthly v0.8.12.
+        run: "sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.8.12/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'"
+      - name: Checkout code.
+        uses: actions/checkout@v3
+      - name: Check linting.
+        run: cd "${{ matrix.directory}}" && earthly --ci +check-${{ matrix.language }}-linting
