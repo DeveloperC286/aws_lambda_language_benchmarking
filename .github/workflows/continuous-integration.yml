@@ -1,6 +1,10 @@
 name: Continuous Integration (CI)
 
-on: pull_request
+on:
+  push:
+    branches:
+      - main
+  pull_request:
 
 env:
   # Forcing Earthly to use colours, to make reading output easier.
@@ -12,8 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        directory: [go/aws, go/local]
-        language: [go, shell]
+        directory: [go/aws, go/local, nodejs/aws, nodejs/local, python3/aws, python3/local, rust/aws, rust/local]
     steps:
       - name: Download Earthly v0.8.12.
         uses: earthly/actions-setup@v1
@@ -22,14 +25,13 @@ jobs:
       - name: Checkout code.
         uses: actions/checkout@v4
       - name: Check formatting.
-        run: cd "${{ matrix.directory }}" && earthly --ci +check-${{ matrix.language }}-formatting
+        run: cd "${{ matrix.directory }}" && earthly --ci +check-formatting
   linting:
     name: Linting
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        directory: [go/aws, go/local]
-        language: [go, shell]
+        directory: [go/aws, go/local, nodejs/aws, nodejs/local, python3/aws, python3/local, rust/aws, rust/local]
     steps:
       - name: Download Earthly v0.8.12.
         uses: earthly/actions-setup@v1
@@ -38,14 +40,13 @@ jobs:
       - name: Checkout code.
         uses: actions/checkout@v4
       - name: Check linting.
-        run: cd "${{ matrix.directory }}" && earthly --ci +check-${{ matrix.language }}-linting
+        run: cd "${{ matrix.directory }}" && earthly --ci +check-linting
   modules:
     name: Modules
     runs-on: ubuntu-latest
     strategy:
       matrix:
         directory: [go/aws, go/local]
-        language: [rust, shell]
     steps:
       - name: Download Earthly v0.8.12.
         uses: earthly/actions-setup@v1
@@ -60,7 +61,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        directory: [go/aws, go/local]
+        directory: [go/aws, go/local, python3/aws, python3/local, rust/aws, rust/local]
     steps:
       - name: Download Earthly v0.8.12.
         uses: earthly/actions-setup@v1
@@ -75,7 +76,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        directory: [go/aws, go/local]
+        directory: [go/aws, go/local, rust/aws, rust/local]
     steps:
       - name: Download Earthly v0.8.12.
         uses: earthly/actions-setup@v1
