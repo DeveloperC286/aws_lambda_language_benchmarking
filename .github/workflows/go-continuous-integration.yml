@@ -12,7 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        directory: [go/aws, go/local, nodejs/aws, nodejs/local, python3/aws, python3/local, rust/aws, rust/local]
+        directory: [go/aws, go/local]
+        language: [go, shell]
     steps:
       - name: Download Earthly v0.8.12.
         uses: earthly/actions-setup@v1
@@ -21,13 +22,14 @@ jobs:
       - name: Checkout code.
         uses: actions/checkout@v4
       - name: Check formatting.
-        run: cd "${{ matrix.directory }}" && earthly --ci +check-formatting
+        run: cd "${{ matrix.directory }}" && earthly --ci +check-${{ matrix.language }}-formatting
   linting:
     name: Linting
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        directory: [go/aws, go/local, nodejs/aws, nodejs/local, python3/aws, python3/local, rust/aws, rust/local]
+        directory: [go/aws, go/local]
+        language: [go, shell]
     steps:
       - name: Download Earthly v0.8.12.
         uses: earthly/actions-setup@v1
@@ -36,7 +38,7 @@ jobs:
       - name: Checkout code.
         uses: actions/checkout@v4
       - name: Check linting.
-        run: cd "${{ matrix.directory }}" && earthly --ci +check-linting
+        run: cd "${{ matrix.directory }}" && earthly --ci +check-${{ matrix.language }}-linting
   modules:
     name: Modules
     runs-on: ubuntu-latest
@@ -57,7 +59,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        directory: [go/aws, go/local, python3/aws, python3/local, rust/aws, rust/local]
+        directory: [go/aws, go/local]
     steps:
       - name: Download Earthly v0.8.12.
         uses: earthly/actions-setup@v1
@@ -72,7 +74,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        directory: [go/aws, go/local, rust/aws, rust/local]
+        directory: [go/aws, go/local]
     steps:
       - name: Download Earthly v0.8.12.
         uses: earthly/actions-setup@v1
