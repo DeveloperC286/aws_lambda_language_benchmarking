@@ -15,10 +15,10 @@ jobs:
         directory: [nodejs/aws, nodejs/local]
         language: [nodejs, shell]
     steps:
-      - name: Download Earthly v0.8.12.
+      - name: Download Earthly.
         uses: earthly/actions-setup@v1
         with:
-          version: v0.8.12
+          version: v0.8.15
       - name: Checkout code.
         uses: actions/checkout@v4
       - name: Check formatting.
@@ -31,10 +31,10 @@ jobs:
         directory: [nodejs/aws, nodejs/local]
         language: [shell]
     steps:
-      - name: Download Earthly v0.8.12.
+      - name: Download Earthly.
         uses: earthly/actions-setup@v1
         with:
-          version: v0.8.12
+          version: v0.8.15
       - name: Checkout code.
         uses: actions/checkout@v4
       - name: Check linting.
