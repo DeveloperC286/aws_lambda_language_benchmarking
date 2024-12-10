@@ -15,10 +15,10 @@ jobs:
         directory: [python3/aws, python3/local]
         language: [python, shell]
     steps:
-      - name: Download Earthly v0.8.12.
+      - name: Download Earthly.
         uses: earthly/actions-setup@v1
         with:
-          version: v0.8.12
+          version: v0.8.15
       - name: Checkout code.
         uses: actions/checkout@v4
       - name: Check formatting.
@@ -31,10 +31,10 @@ jobs:
         directory: [python3/aws, python3/local]
         language: [shell]
     steps:
-      - name: Download Earthly v0.8.12.
+      - name: Download Earthly.
         uses: earthly/actions-setup@v1
         with:
-          version: v0.8.12
+          version: v0.8.15
       - name: Checkout code.
         uses: actions/checkout@v4
       - name: Check linting.
@@ -46,10 +46,10 @@ jobs:
       matrix:
         directory: [python3/aws, python3/local]
     steps:
-      - name: Download Earthly v0.8.12.
+      - name: Download Earthly.
         uses: earthly/actions-setup@v1
         with:
-          version: v0.8.12
+          version: v0.8.15
       - name: Checkout code.
         uses: actions/checkout@v4
       - name: Compile.
