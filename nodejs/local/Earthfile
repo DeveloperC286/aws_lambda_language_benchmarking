@@ -20,7 +20,7 @@ COPY_SOURCECODE:
 
 
 nodejs-base:
-    FROM node:22.6.0
+    FROM node:22.6.0@sha256:914458d8617650599ec2c05f6754403a1ce08cb471b0b1de1de439c539f8d45f
 	DO +INSTALL_DEPENDENCIES
     DO +COPY_SOURCECODE
 
@@ -31,7 +31,7 @@ check-nodejs-formatting:
 
 
 sh-formatting-base:
-    FROM golang:1.22.1
+    FROM golang:1.22.1@sha256:0b55ab82ac2a54a6f8f85ec8b943b9e470c39e32c109b766bbc1b801f3fa8d3b
     RUN go install mvdan.cc/sh/v3/cmd/shfmt@v3.6.0
     DO +COPY_CI_DATA
 
@@ -63,7 +63,7 @@ fix-formatting:
 
 
 ubuntu-base:
-    FROM ubuntu:22.04
+    FROM ubuntu:22.04@sha256:0e5e4a57c2499249aafc3b40fcd541e9a456aab7296681a3994d631587203f97
     # https://askubuntu.com/questions/462690/what-does-apt-get-fix-missing-do-and-when-is-it-useful
     RUN apt-get update --fix-missing
 
