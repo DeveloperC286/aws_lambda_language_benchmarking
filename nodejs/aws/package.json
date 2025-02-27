@@ -3,6 +3,6 @@
   "version": "0.1.0",
   "main": "src/main.js",
   "devDependencies": {
-    "js-beautify": "1.15.3"
+    "js-beautify": "1.15.4"
   }
 }
