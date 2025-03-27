@@ -28,7 +28,7 @@ check-rust-formatting:
 
 
 golang-base:
-    FROM golang:1.22.1@sha256:0b55ab82ac2a54a6f8f85ec8b943b9e470c39e32c109b766bbc1b801f3fa8d3b
+    FROM golang:1.24.1@sha256:52ff1b35ff8de185bf9fd26c70077190cd0bed1e9f16a2d498ce907e5c421268
 
 
 shell-formatting-base:
