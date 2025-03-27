@@ -3,6 +3,6 @@ kiwisolver==1.4.8
 matplotlib==3.10.1
 numpy==2.2.4
 Pillow==11.1.0
-pyparsing==3.2.1
+pyparsing==3.2.3
 python-dateutil==2.9.0.post0
 six==1.17.0
