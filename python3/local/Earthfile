@@ -13,7 +13,7 @@ COPY_SOURCECODE:
 
 
 python-base:
-    FROM python:3-slim@sha256:8b9e72fd1daf4f1eb12963832140a8a34de16244a0958bf00d08519dfbd79506
+    FROM python:3-slim@sha256:f2fdaec50160418e0c2867ba3e254755edd067171725886d5d303fd7057bbf81
     WORKDIR /tmp/aws_lambda_language_benchmarking
     DO +COPY_SOURCECODE
 
