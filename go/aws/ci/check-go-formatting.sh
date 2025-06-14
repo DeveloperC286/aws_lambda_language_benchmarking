@@ -3,6 +3,5 @@
 set -o errexit
 set -o xtrace
 
-output=$(gofmt -l ".")
-echo "${output}"
-test -z "${output}"
+gofmt -d .
+test -z "$(gofmt -l .)"
