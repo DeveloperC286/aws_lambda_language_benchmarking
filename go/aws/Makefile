@@ -8,17 +8,20 @@ check-go-formatting:
 	docker build -t check-go-formatting -f ci/check-go-formatting.Dockerfile .
 	docker run --rm -v $(PWD):/workspace check-go-formatting
 
+# renovate: depName=mvdan/shfmt
+SHFMT_VERSION=v3.11.0-alpine@sha256:394d755b6007056a2e6d7537ccdbdcfca01b9855ba91e99df0166ca039c9d422
+
 check-shell-formatting:
-	docker pull mvdan/shfmt:v3.11.0-alpine
-	docker run --rm -v $(PWD):/workspace -w /workspace mvdan/shfmt:v3.11.0-alpine --simplify --diff ci/* 
+	docker pull mvdan/shfmt:$(SHFMT_VERSION)
+	docker run --rm -v $(PWD):/workspace -w /workspace mvdan/shfmt:$(SHFMT_VERSION) --simplify --diff ci/* 
 
 fix-go-formatting:
 	docker build -t fix-go-formatting -f ci/fix-go-formatting.Dockerfile .
 	docker run --rm -v $(PWD):/workspace -u $(UID):$(GID) fix-go-formatting
 
 fix-shell-formatting:
-	docker pull mvdan/shfmt:v3.11.0-alpine
-	docker run --rm -v $(PWD):/workspace -w /workspace -u $(UID):$(GID) mvdan/shfmt:v3.11.0-alpine --simplify --write ci/* 
+	docker pull mvdan/shfmt:$(SHFMT_VERSION)
+	docker run --rm -v $(PWD):/workspace -w /workspace -u $(UID):$(GID) mvdan/shfmt:$(SHFMT_VERSION) --simplify --write ci/* 
 
 check-go-linting:
 	docker build -t check-go-linting -f ci/check-go-linting.Dockerfile .
