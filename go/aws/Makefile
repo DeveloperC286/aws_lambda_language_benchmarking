@@ -33,11 +33,11 @@ check-modules:
 
 fix-modules:
 	docker build -t fix-modules -f ci/fix-modules.Dockerfile .
-	docker run --rm -v $(PWD):/workspace fix-modules
+	docker run --rm -v $(PWD):/workspace -u $(UID):$(GID) fix-modules
 
 compile:
 	docker build -t compile -f ci/compile.Dockerfile .
-	docker run --rm -v $(PWD):/workspace compile
+	docker run --rm -v $(PWD):/workspace -u $(UID):$(GID) compile
 
 unit-test:
 	docker build -t unit-test -f ci/unit-test.Dockerfile .
