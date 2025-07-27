@@ -1,4 +1,4 @@
-FROM rust:1.87.0-alpine3.21@sha256:fa7c28576553c431224a85c897c38f3a6443bd831be37061ab3560d9e797dc82
+FROM rust:1.88.0-alpine3.21@sha256:54e937b1530d435dc83b94f5a61ef08365127f2fefbb3789712c5d6f55bbb58c
 RUN apk add --no-cache \
 	musl-dev=1.2.5-r9
 
