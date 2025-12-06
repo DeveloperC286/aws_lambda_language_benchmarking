@@ -3,6 +3,6 @@
   "version": "0.1.0",
   "main": "src/main.js",
   "devDependencies": {
-    "prettier": "3.7.3"
+    "prettier": "3.7.4"
   }
 }
