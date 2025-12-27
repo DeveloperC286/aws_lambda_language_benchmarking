@@ -2,4 +2,4 @@ module aws_lambda_language_benchmarking
 
 go 1.16
 
-require github.com/aws/aws-lambda-go v1.49.0
+require github.com/aws/aws-lambda-go v1.51.1
