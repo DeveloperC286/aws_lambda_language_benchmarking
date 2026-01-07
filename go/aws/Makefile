@@ -17,12 +17,12 @@ fix-go-formatting:
 check-go-linting:
 	golangci-lint run ./...
 
-.PHONY: check-modules
-check-modules:
+.PHONY: check-go-dependencies
+check-go-dependencies:
 	go mod tidy -diff
 
-.PHONY: fix-modules
-fix-modules:
+.PHONY: fix-go-dependencies
+fix-go-dependencies:
 	go mod tidy -v
 
 .PHONY: compile
