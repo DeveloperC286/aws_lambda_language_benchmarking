@@ -23,8 +23,9 @@
           hardeningDisable = [ "all" ];
 
           buildInputs = [
-            # GitHub Action Workflows.
+            # YAML formatting.
             pkgs.yamlfmt
+            # GitHub Actions workflows linting.
             pkgs.actionlint
           ];
         };
