@@ -12,8 +12,10 @@
       {
         devShells.default = pkgs.mkShell {
           buildInputs = [
-            pkgs.go
+            # Go linting.
             pkgs.golangci-lint
+            # Go compiling.
+            pkgs.go
           ];
         };
       }

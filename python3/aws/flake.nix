@@ -12,8 +12,10 @@
       {
         devShells.default = pkgs.mkShell {
           buildInputs = [
-            pkgs.python3
-            pkgs.python3Packages.autopep8
+            # Python formatting.
+            pkgs.python313Packages.autopep8
+            # Python compiling.
+            pkgs.python313
           ];
         };
       }
