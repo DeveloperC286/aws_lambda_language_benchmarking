@@ -14,6 +14,8 @@
           buildInputs = [
             # Python formatting.
             pkgs.python313Packages.autopep8
+            # Python linting.
+            pkgs.python313Packages.ruff
             # Python compiling.
             pkgs.python313
           ];
