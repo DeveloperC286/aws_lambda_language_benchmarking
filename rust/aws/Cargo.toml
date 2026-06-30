@@ -11,7 +11,7 @@ lambda_runtime = "0.4.1"
 tokio = "1.15.0"
 
 # For SHA256 hashing.
-sha2 = "0.10.0"
+sha2 = "0.11.0"
 
 # For JSON serialization/deserialization.
 serde = "1.0.132"
