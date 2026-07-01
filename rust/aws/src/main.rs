@@ -74,5 +74,5 @@ fn hash_input(input: String) -> String {
         output = Sha256::digest(output);
     }
 
-    format!("{:x}", output)
+    output.iter().map(|b| format!("{b:02x}")).collect()
 }
