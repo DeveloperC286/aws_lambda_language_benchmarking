@@ -1,4 +1,4 @@
-use lambda_runtime::{handler_fn, Context, Error};
+use lambda_runtime::{service_fn, Error, LambdaEvent};
 use serde_derive::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 
@@ -23,12 +23,12 @@ struct Response {
 
 #[tokio::main]
 async fn main() -> Result<(), Error> {
-    let func = handler_fn(handler);
-    lambda_runtime::run(func).await?;
+    lambda_runtime::run(service_fn(handler)).await?;
     Ok(())
 }
 
-async fn handler(request: Request, _: Context) -> Result<Response, Error> {
+async fn handler(event: LambdaEvent<Request>) -> Result<Response, Error> {
+    let (request, _) = event.into_parts();
     match request.body {
         Some(body) => match body.trim() {
             "" | "{}" => Ok(Response {
