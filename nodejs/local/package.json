@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "main": "src/main.js",
   "dependencies": {
-    "yargs": "18.0.0"
+    "yargs": "18.1.0"
   },
   "devDependencies": {
     "js-beautify": "2.0.3",
