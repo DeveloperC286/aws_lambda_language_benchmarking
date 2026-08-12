@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
-import json
 import hashlib
+import json
 
 
 def lambda_handler(event, context):
@@ -12,7 +12,7 @@ def lambda_handler(event, context):
         if body != '' and body != '{}':
             try:
                 body = json.loads(body)
-            except Exception:
+            except json.JSONDecodeError:
                 return {
                     'statusCode': 400,
                     'body': 'The request body is not valid JSON.'

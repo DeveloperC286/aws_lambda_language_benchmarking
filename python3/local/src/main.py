@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
-import sys
 import argparse
 import hashlib
+import sys
 
 
 def main(argv):
@@ -21,5 +21,5 @@ def hash_input(input):
     return hashlib.sha256(output).hexdigest()
 
 
-if __name__ == "__main__":  # noqa
+if __name__ == "__main__":
     main(sys.argv[1:])
